@@ -32,11 +32,18 @@
 
 import { faker } from '@faker-js/faker';
 Cypress.Commands.add('generateUser', () => {
+    const password = faker.internet.password({ length: 10, memorable: true });
     return {
         firstName: faker.person.firstName(),
         lastName: faker.person.lastName(),
-        email: faker.internet.email(),
-        phone: faker.phone.number(),
         address: faker.location.streetAddress(),
+        city: faker.location.city(),
+        state: faker.location.state(),
+        zipCode: faker.location.zipCode(),
+        phone: faker.phone.number('(###) ###-####'),
+        ssn: faker.string.numeric(9).replace(/(\d{3})(\d{2})(\d{4})/, '$1-$2-$3'),
+        username: faker.internet.email(),
+        password: password,
+        confirm: password
     };
 });
