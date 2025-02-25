@@ -13,4 +13,7 @@ describe("Registration", () => {
     cy.generateUser().then((user) => {
      registerPage.firstName.type(user.firstName);
      registerPage.lastNametype(user.lastName);
-     r
+     registerPage.emailInput.type(user.email);
+    });
+    })
+})
