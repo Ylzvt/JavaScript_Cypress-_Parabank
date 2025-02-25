@@ -15,7 +15,7 @@ jobs:
       - name: Run Cypress tests
         run: npx cypress run
 
-      - name: Upload screenshots (only if tests fail)
+      - name: Upload screenshots on failure
         if: failure()
         uses: actions/upload-artifact@v3
         with:

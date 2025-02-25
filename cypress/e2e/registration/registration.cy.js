@@ -12,8 +12,10 @@ describe("Registration", () => {
     homePage.registerBtn.click()
     cy.generateUser().then((user) => {
      registerPage.firstName.type(user.firstName);
-     registerPage.lastNametype(user.lastName);
-     registerPage.emailInput.type(user.email);
+     registerPage.lastName.type(user.lastName);
+     registerPage.address.type(user.address);
+     registerPage.city.type(user.city)
+
     });
     })
 })
