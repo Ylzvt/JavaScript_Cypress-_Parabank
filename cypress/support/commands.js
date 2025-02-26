@@ -25,25 +25,23 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 
+import Chance from "chance";
+const chance = new Chance();
 
+Cypress.Commands.add("generateUser", () => {
+  const password = chance.string({ length: 8, pool: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" });
 
-// import { registerCommand } from 'cypress-wait-for-stable-dom'
-// registerCommand()
-
-import { faker } from '@faker-js/faker';
-Cypress.Commands.add('generateUser', () => {
-    const password = faker.internet.password({ length: 10, memorable: true });
-    return {
-        firstName: faker.person.firstName(),
-        lastName: faker.person.lastName(),
-        address: faker.location.streetAddress(),
-        city: faker.location.city(),
-        state: faker.location.state(),
-        zipCode: faker.location.zipCode(),
-        phone: faker.phone.number('(###) ###-####'),
-        ssn: faker.string.numeric(9).replace(/(\d{3})(\d{2})(\d{4})/, '$1-$2-$3'),
-        username: faker.internet.email(),
-        password: password,
-        confirm: password
-    };
+  return {
+    firstName: chance.first(),
+    lastName: chance.last(),
+    address: chance.address(),
+    city: chance.city(),
+    state: chance.state({ full: true }),
+    zipCode: chance.zip(),
+    phone: chance.phone({ formatted: false }),
+    ssn: chance.ssn({ dashes: true }),
+    username: chance.email({ domain: "example.com" }), // Ensures uniqueness
+    password: password,
+    confirm: password,
+  };
 });
